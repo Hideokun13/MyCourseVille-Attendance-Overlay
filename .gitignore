@@ -1,0 +1,16 @@
+# Local test evidence and generated packages
+edge-overlay-proof.png
+release/
+*.zip
+*.crx
+*.pem
+
+# Local build and test output
+coverage/
+dist/
+node_modules/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini

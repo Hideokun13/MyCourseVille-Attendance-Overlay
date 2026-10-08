@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "MyCourseVille Attendance Overlay",
+  "version": "1.0.0",
+  "author": "Hideokun13",
+  "description": "Summarizes and filters Present, Absent, Late, and Not checked statuses on MyCourseVille attendance pages.",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_title": "Attendance Overlay",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.mycourseville.com/*"],
+      "js": ["mcv-attendance.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

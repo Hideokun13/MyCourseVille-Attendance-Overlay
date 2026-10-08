@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MyCourseVille Attendance Overlay Demo</title>
+    <style>
+      * { box-sizing: border-box; }
+      html { overflow-y: scroll; }
+      body { margin: 0; font-family: Arial, "Noto Sans Thai", sans-serif; color: #111827; background: #fff; }
+      .topbar { height: 104px; display: flex; align-items: center; justify-content: space-between; padding: 0 86px; background: #fff; }
+      .logo { position: relative; color: #4f91d8; font-size: 38px; font-weight: 800; letter-spacing: -3px; }
+      .logo small { position: absolute; top: -10px; left: 12px; color: #64748b; font-size: 13px; font-weight: 400; letter-spacing: 0; }
+      .logo em { color: #e7a42f; font-style: normal; }
+      .top-icons { display: flex; gap: 30px; color: #4f91d8; font-size: 27px; }
+      .nav { height: 58px; display: flex; align-items: center; gap: 36px; padding: 0 84px; color: #fff; background: #4f91d8; font-size: 17px; }
+      .layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 38px; width: min(1420px, calc(100% - 70px)); margin: 34px auto; }
+      aside { padding-top: 4px; }
+      .course-title { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; font-size: 17px; font-weight: 700; }
+      .course-mark { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 10px; color: #fff; background: linear-gradient(145deg,#7ab7ed,#2c6bb2); font-weight: 800; box-shadow: 0 7px 14px #1e3a5f30; }
+      select { width: 100%; margin-bottom: 10px; padding: 9px 12px; border: 1px solid #d5dbe3; border-radius: 5px; color: #475569; background: #fff; }
+      .menu-title { margin: 20px 0 2px; padding-bottom: 4px; border-bottom: 2px solid #4f91d8; font-size: 18px; font-weight: 700; }
+      .menu-item { padding: 7px 6px; border-bottom: 1px dotted #b5ccec; font-size: 15px; }
+      .breadcrumb { margin-bottom: 24px; color: #4f91d8; font-size: 16px; }
+      .session-select { width: 100%; padding: 11px 16px; border: 1px solid #d5dbe3; border-radius: 5px; font-size: 17px; }
+      .heading { margin: 24px 0 4px; padding-bottom: 5px; border-bottom: 3px solid #4f91d8; font-size: 19px; }
+      .instructions { padding: 18px; border-radius: 6px; background: #fff3d8; }
+      .instructions p { margin: 0 0 20px; font-size: 16px; }
+      .legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+      .legend span { font-size: 15px; }
+      .legend b { display: inline-grid; place-items: center; width: 26px; height: 26px; margin-right: 7px; border: 2px solid currentColor; border-radius: 6px; }
+      .check-options { margin-top: 18px; display: grid; gap: 10px; }
+      .check-options button { padding: 7px 12px; border: 1px solid #8b98a8; border-radius: 5px; color: #334155; background: #fff; font-size: 14px; }
+      .check-options input { width: 72px; padding: 7px; border: 1px solid #94a3b8; border-radius: 5px; font-size: 14px; }
+      .flag-filter { margin: 14px 0 10px; padding: 14px 18px; border-radius: 5px; background: #dedede; font-size: 16px; }
+      table { width: 100%; border-collapse: collapse; font-size: 15px; }
+      th { padding: 13px 16px; color: #fff; background: #8a8f94; text-align: left; }
+      td { padding: 12px 16px; }
+      tbody tr:nth-child(odd) { background: #cdeffc; }
+      tbody tr:nth-child(even) { background: #e9f7fd; }
+      .number-badge { display: inline-block; min-width: 24px; padding: 3px 6px; border-radius: 4px; color: #fff; background: #777; font-size: 12px; font-weight: 700; text-align: center; }
+      .example-name strong, .example-name small { display: block; }
+      .example-name small { margin-top: 2px; font-size: 12px; }
+      .attendance-buttons { display: flex; gap: 8px; }
+      .attendance-buttons .cv-attendance-icon { display: grid; place-items: center; width: 38px; height: 34px; border-radius: 7px; color: #91bee9; background: #eaf7ff; font-size: 20px; font-weight: 700; }
+      .attendance-buttons .cv-attendance-icon[data-active="1"] { color: #111; background: #fff; outline: 2px solid #94a3b8; box-shadow: 0 2px 5px #0003; }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="logo"><small>my</small>Course<em>Ville</em></div>
+      <div class="top-icons"><span>▦</span><span>●</span></div>
+    </div>
+    <nav class="nav"><span>My Courses</span><span>Online Courses</span><span>Evaluation Center</span><span>Join a course</span><span>Back Office</span></nav>
+    <div class="layout">
+      <aside>
+        <div class="course-title"><span class="course-mark">CV</span><span>Example Course<br>DEMO ONLY</span></div>
+        <select id="cvcourseleftcol-btn-course-code-trigger" aria-label="Demo course"><option>DEMO101.001</option></select>
+        <select aria-label="Demo term"><option>2026/1</option></select>
+        <div class="menu-title">Course Menu</div>
+        <div class="menu-item">DEMO101.001 (2026/1)</div>
+        <div class="menu-item">Home</div>
+        <div class="menu-item">Assignments</div>
+        <div class="menu-item">Assessment platform</div>
+        <div class="menu-item">Media gallery</div>
+        <div class="menu-item">Schedule</div>
+        <div class="menu-item">Discussions</div>
+        <div class="menu-item">Student Roster</div>
+        <div class="menu-item">Student Group</div>
+        <div class="menu-item">Course Admin</div>
+      </aside>
+      <main>
+        <div class="breadcrumb">Course Home &gt; Course Admin &gt; Attendance check</div>
+        <select id="courseville-attendance-check-si-select" class="session-select" aria-label="Demo attendance session"><option>Thu Oct 8, 2026: Demonstration Session</option></select>
+        <h1 class="heading">Checking attendance for: Thu Oct 8, 2026: Demonstration Session</h1>
+        <section class="instructions">
+          <p>To mark the attendance for each student, click on one of the 4 choices.</p>
+          <div class="legend"><span><b>−</b>Not checked</span><span><b>✓</b>Present</span><span><b>×</b>Absent</span><span><b>◷</b>Late</span></div>
+          <div class="check-options">
+            <div>Or &nbsp; <button>▦ &nbsp; Show self attendance-checking QR</button> &nbsp; which will be valid for &nbsp; <input value="10" aria-label="Demo duration"> &nbsp; minutes</div>
+            <div>Or &nbsp; <button>🔗 &nbsp; Turn on URL check-in</button> &nbsp; The URL will be valid until its window is closed.</div>
+          </div>
+        </section>
+        <div class="flag-filter">❯ &nbsp; Filter by flags</div>
+        <table id="courseville-attendance-sheet-table">
+          <thead><tr><th>Demo ID</th><th>In-course #</th><th>Example name</th><th>Attendance</th></tr></thead>
+          <tbody>
+            <tr><td>DEMO-001</td><td><span class="number-badge">1</span></td><td class="example-name"><strong>Example Student</strong><small>Alpha</small></td><td class="courseville-attendance-control-column"><div class="attendance-buttons"><span class="cv-attendance-icon" data-status="0" data-active="0">−</span><span class="cv-attendance-icon" data-status="1" data-active="1">✓</span><span class="cv-attendance-icon" data-status="2" data-active="0">×</span><span class="cv-attendance-icon" data-status="3" data-active="0">◷</span></div></td></tr>
+            <tr><td>DEMO-002</td><td><span class="number-badge">2</span></td><td class="example-name"><strong>Example Student</strong><small>Bravo</small></td><td class="courseville-attendance-control-column"><div class="attendance-buttons"><span class="cv-attendance-icon" data-status="0" data-active="0">−</span><span class="cv-attendance-icon" data-status="1" data-active="0">✓</span><span class="cv-attendance-icon" data-status="2" data-active="0">×</span><span class="cv-attendance-icon" data-status="3" data-active="1">◷</span></div></td></tr>
+            <tr><td>DEMO-003</td><td><span class="number-badge">3</span></td><td class="example-name"><strong>Example Student</strong><small>Charlie</small></td><td class="courseville-attendance-control-column"><div class="attendance-buttons"><span class="cv-attendance-icon" data-status="0" data-active="0">−</span><span class="cv-attendance-icon" data-status="1" data-active="0">✓</span><span class="cv-attendance-icon" data-status="2" data-active="1">×</span><span class="cv-attendance-icon" data-status="3" data-active="0">◷</span></div></td></tr>
+            <tr><td>DEMO-004</td><td><span class="number-badge">4</span></td><td class="example-name"><strong>Example Student</strong><small>Delta</small></td><td class="courseville-attendance-control-column"><div class="attendance-buttons"><span class="cv-attendance-icon" data-status="0" data-active="0">−</span><span class="cv-attendance-icon" data-status="1" data-active="1">✓</span><span class="cv-attendance-icon" data-status="2" data-active="0">×</span><span class="cv-attendance-icon" data-status="3" data-active="0">◷</span></div></td></tr>
+            <tr><td>DEMO-005</td><td><span class="number-badge">5</span></td><td class="example-name"><strong>Example Student</strong><small>Echo</small></td><td class="courseville-attendance-control-column"><div class="attendance-buttons"><span class="cv-attendance-icon" data-status="0" data-active="0">−</span><span class="cv-attendance-icon" data-status="1" data-active="0">✓</span><span class="cv-attendance-icon" data-status="2" data-active="0">×</span><span class="cv-attendance-icon" data-status="3" data-active="1">◷</span></div></td></tr>
+            <tr><td>DEMO-006</td><td><span class="number-badge">6</span></td><td class="example-name"><strong>Example Student</strong><small>Foxtrot</small></td><td class="courseville-attendance-control-column"><div class="attendance-buttons"><span class="cv-attendance-icon" data-status="0" data-active="1">−</span><span class="cv-attendance-icon" data-status="1" data-active="0">✓</span><span class="cv-attendance-icon" data-status="2" data-active="0">×</span><span class="cv-attendance-icon" data-status="3" data-active="0">◷</span></div></td></tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+    <script>
+      globalThis.chrome = {
+        storage: { local: { get: (_key, callback) => callback({ mcvAttendanceOverlay: { language: "en" } }), set: () => {} } },
+        runtime: { onMessage: { addListener: () => {} } },
+      };
+    </script>
+    <script src="mcv-attendance.js"></script>
+    <script src="content.js"></script>
+  </body>
+</html>

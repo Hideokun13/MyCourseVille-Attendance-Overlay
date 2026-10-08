@@ -1,0 +1,23 @@
+:root { color-scheme: light dark; }
+* { box-sizing:border-box; }
+body { margin:0; min-width:310px; font-family:Inter,"Noto Sans Thai",system-ui,sans-serif; color:#172033; background:#f8fafc; }
+main { padding:18px; }
+.brand { display:flex; align-items:center; gap:11px; margin-bottom:17px; }
+.brand > div { flex:1; min-width:0; }
+.brand > span { display:grid; place-items:center; width:42px; height:42px; border-radius:13px; color:#fff; background:linear-gradient(135deg,#172554,#2563eb); font-size:12px; font-weight:800; }
+strong, small { display:block; }
+.brand strong { font-size:14px; }.brand small,.toggle small { margin-top:3px; color:#64748b; font-size:11px; }
+.toggle { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:13px; border:1px solid #e2e8f0; border-radius:13px; background:#fff; cursor:pointer; }
+.toggle strong { font-size:13px; }.toggle input { position:absolute; opacity:0; }
+.toggle i { position:relative; width:39px; height:23px; flex:none; border-radius:20px; background:#cbd5e1; transition:.2s; }
+.toggle i::after { content:""; position:absolute; top:3px; left:3px; width:17px; height:17px; border-radius:50%; background:#fff; box-shadow:0 1px 3px #0003; transition:.2s; }
+.toggle input:checked + i { background:#2563eb; }.toggle input:checked + i::after { transform:translateX(16px); }
+button { width:100%; margin-top:12px; padding:10px 12px; border:0; border-radius:10px; color:#fff; background:#172554; font:600 12px inherit; cursor:pointer; }
+.language-button { width:34px; margin:0; padding:7px 5px; border:1px solid #dbeafe; color:#1d4ed8; background:#eff6ff; font-size:10px; font-weight:800; }
+.language-button:hover { background:#dbeafe; }
+button:hover { background:#1e3a8a; } button:disabled { opacity:.5; cursor:default; }
+#status { min-height:16px; margin:10px 2px 0; color:#64748b; font-size:10px; text-align:center; }
+.privacy-note { margin:12px 0 0; padding:10px; border:1px solid #bbf7d0; border-radius:10px; color:#166534; background:#f0fdf4; font-size:10px; line-height:1.45; text-align:center; }
+.privacy-note strong { margin-bottom:2px; font-size:11px; }
+.privacy-note span { display:block; }
+@media (prefers-color-scheme:dark) { body{color:#e5e7eb;background:#0f172a}.toggle{background:#1e293b;border-color:#334155}.brand small,.toggle small,#status{color:#94a3b8}.privacy-note{color:#bbf7d0;background:#052e16;border-color:#166534} }

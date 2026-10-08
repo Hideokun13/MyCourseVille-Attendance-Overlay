@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Attendance Overlay</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <div class="brand"><span>MCV</span><div><strong>Attendance Overlay</strong><small id="brand-subtitle">For MyCourseVille only</small></div><button id="language" class="language-button" type="button" aria-label="Switch language">EN</button></div>
+      <label class="toggle"><span><strong id="enabled-title">Show overlay</strong><small id="enabled-subtitle">On Attendance Check pages</small></span><input id="enabled" type="checkbox"><i></i></label>
+      <button id="refresh">Refresh this page</button>
+      <p id="status">Checking…</p>
+      <p class="privacy-note"><strong id="privacy-title">Local-only processing</strong><span id="privacy-text">No data is sent to the developer, and MyCourseVille credentials are never read or stored.</span></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
